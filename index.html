@@ -12,14 +12,30 @@
 
 <body>
     <!------NAVBAR------>
-    <header>
+    <!-- <header>
         <h1>BEST SYSTEM</h1>
         <nav>
             <a href="#">Inicio</a>
             <a href="#servicios">Servicios</a>
             <a href="#contacto">Contáctanos</a>
-            
+
         </nav>
+    </header> -->
+
+    <header>
+        <h1>BEST SYSTEM</h1>
+
+        <nav id="nav">
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <!-- <a href="#portfolio">Portafolio</a> -->
+            <a href="#contacto">Contacto</a>
+        </nav>
+
+        <!-- BOTÓN HAMBURGUESA -->
+        <div class="menu-toggle" id="menu-toggle">
+            ☰
+        </div>
     </header>
 
     <!--CARRUSEL---->>
@@ -180,7 +196,7 @@
 
 
     <!--------PRECIOS--------->
-    <section id="precios"class="pricing">
+    <section id="precios" class="pricing">
         <h2 class="tituloPricing">Planes de desarrollo web</h2>
 
         <div class="grid">
@@ -229,11 +245,26 @@
         <h2>Contacto</h2>
         <p>Déjame tus datos y te contacto rápidamente</p>
 
-        <form onsubmit="sendMessage(event)">
-            <input type="text" placeholder="Nombre" required>
-            <input type="email" placeholder="Correo" required>
-            <textarea placeholder="Mensaje" required></textarea>
-            <button class="btn">Enviar</button>
+        <form name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+
+            <!-- Campo oculto obligatorio -->
+            <input type="hidden" name="form-name" value="contacto">
+
+            <!-- Anti-spam invisible -->
+            <p style="display:none;">
+                <label><!-- No llenar esto: --> <input name="bot-field"></label>
+            </p>
+
+            <input type="text" name="nombre" placeholder="Nombre" required minlength="3">
+
+            <input type="email" name="email" placeholder="Correo" required>
+
+            <input type="tel" name="telefono" placeholder="Teléfono" required pattern="[0-9+ ]{7,15}">
+
+            <textarea name="mensaje" placeholder="Mensaje" required minlength="10"></textarea>
+
+            <button class="btn" type="submit">Enviar</button>
+
         </form>
     </section>
 
@@ -254,6 +285,14 @@
     <Script src="script.js"></Script>
     <link rel="stylesheet" href="styles.css">
 
+    <!-- VENTANA POPUP PARA ENVIO DE DATOS CORRECTOS -->
+    <div id="popup-success" class="popup">
+        <div class="popup-content">
+            <h3>✅ Mensaje enviado</h3>
+            <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
+            <button onclick="closePopup()" class="btn">Cerrar</button>
+        </div>
+    </div>
 </body>
 
 </html>
