@@ -625,6 +625,34 @@ footer {
 }
 
 
+/* POPUP ENVIO FORMULARIO */
+
+.check-icon {
+    font-size: 50px;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+    animation: pop 0.4s ease;
+}
+
+.check-btn {
+    margin-top: 15px;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* hasta aquiii */
+
+
 /* HEADER CON RESPONSIVE PARA CELULARES*/
 header {
     display: flex;

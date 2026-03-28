@@ -48,16 +48,12 @@ if (form) {
     form.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        // Desactivar botón para evitar doble envío
         if (button) button.disabled = true;
 
         fetch("/", {
             method: "POST",
             body: new URLSearchParams(new FormData(form))
         });
-
-        // IMPORTANTE: NO esperar respuesta
-        // Netlify ya procesa el formulario correctamente
 
         setTimeout(() => {
             popup.classList.add("active");
@@ -70,7 +66,6 @@ if (form) {
 function closePopup() {
     popup.classList.remove("active");
 }
-
 
 
 /* HEADER CON RESPONSIVE PARA CELULARES */
