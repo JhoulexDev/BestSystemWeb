@@ -43,26 +43,29 @@ setInterval(() => {
 const form = document.querySelector("form");
 const popup = document.getElementById("popup-success");
 
-form.addEventListener("submit", function (e) {
-    e.preventDefault(); // para evitar recarga
+if (form) {
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    fetch("/", {
-        method: "POST",
-        body: new FormData(form)
-    })
-        .then(() => {
-            popup.classList.add("active");
-            form.reset();
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(new FormData(form)).toString()
         })
-        .catch(() => {
-            alert("Hubo un error. Intenta nuevamente.");
-        });
-});
+            .then(() => {
+                popup.classList.add("active");
+                form.reset();
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                alert("Hubo un error. Intenta nuevamente.");
+            });
+    });
+}
 
 function closePopup() {
     popup.classList.remove("active");
 }
-
 
 
 
