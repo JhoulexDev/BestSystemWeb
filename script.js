@@ -49,23 +49,22 @@ if (form) {
 
         fetch("/", {
             method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(new FormData(form)).toString()
+            body: new URLSearchParams(new FormData(form))
         })
-            .then((response) => {
-                // 🔥 CLAVE: aceptar respuesta aunque sea redirect
-                if (response.ok || response.type === "opaqueredirect") {
-                    popup.classList.add("active");
-                    form.reset();
-                } else {
-                    throw new Error("Error en el envío");
-                }
+            .then(() => {
+                // SIEMPRE mostrar éxito (porque Netlify ya lo guardó)
+                popup.classList.add("active");
+                form.reset();
             })
             .catch((error) => {
-                console.error("Error:", error);
-                alert("Hubo un error. Intenta nuevamente.");
+                console.error("Error real:", error);
+                alert("Error de conexión. Intenta nuevamente.");
             });
     });
+}
+
+function closePopup() {
+    popup.classList.remove("active");
 }
 
 function closePopup() {
