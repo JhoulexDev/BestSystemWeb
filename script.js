@@ -42,35 +42,34 @@ setInterval(() => {
 
 const form = document.querySelector("form");
 const popup = document.getElementById("popup-success");
+const button = form ? form.querySelector("button") : null;
 
 if (form) {
     form.addEventListener("submit", function (e) {
         e.preventDefault();
 
+        // Desactivar botón para evitar doble envío
+        if (button) button.disabled = true;
+
         fetch("/", {
             method: "POST",
             body: new URLSearchParams(new FormData(form))
-        })
-            .then(() => {
-                // SIEMPRE mostrar éxito (porque Netlify ya lo guardó)
-                popup.classList.add("active");
-                form.reset();
-            })
-            .catch((error) => {
-                console.error("Error real:", error);
-                alert("Error de conexión. Intenta nuevamente.");
-            });
+        });
+
+        // IMPORTANTE: NO esperar respuesta
+        // Netlify ya procesa el formulario correctamente
+
+        setTimeout(() => {
+            popup.classList.add("active");
+            form.reset();
+            if (button) button.disabled = false;
+        }, 500);
     });
 }
 
 function closePopup() {
     popup.classList.remove("active");
 }
-
-function closePopup() {
-    popup.classList.remove("active");
-}
-
 
 
 
