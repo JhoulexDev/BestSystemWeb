@@ -52,9 +52,14 @@ if (form) {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams(new FormData(form)).toString()
         })
-            .then(() => {
-                popup.classList.add("active");
-                form.reset();
+            .then((response) => {
+                // 🔥 CLAVE: aceptar respuesta aunque sea redirect
+                if (response.ok || response.type === "opaqueredirect") {
+                    popup.classList.add("active");
+                    form.reset();
+                } else {
+                    throw new Error("Error en el envío");
+                }
             })
             .catch((error) => {
                 console.error("Error:", error);
