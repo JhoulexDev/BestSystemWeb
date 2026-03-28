@@ -4,11 +4,11 @@ function scrollToContact() {
 }
 
 // Simulación de envío de formulario
-function sendMessage(e) {
+/* function sendMessage(e) {
     e.preventDefault();
     alert('Mensaje enviado. Pronto te contactaré.');
 }
-
+ */
 
 
 /* CARRUSEL */
